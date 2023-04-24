@@ -3,6 +3,7 @@ const connectDB = require("./db/connect");
 const cors = require("cors");
 require('dotenv').config();
 const students = require('./routes/studentroute');
+const login = require('./routes/loginroute');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
 const app = express();
@@ -23,7 +24,8 @@ const start = async () => {
 
 
 app.use('/api/students', students)
-// app.use(errorHandlerMiddleware);
+app.use('/login',login )
+app.use(errorHandlerMiddleware);
 
 start();
 
