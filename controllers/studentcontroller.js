@@ -4,8 +4,16 @@ const asyncWrapper = require('../middleware/async')
 const { createCustomError } = require('../errors/custom-error')
 
 const getAllStudents = asyncWrapper(async (req, res) => {
-    const Students = await Student.find({})
+    const authToken = req.headers.authorization;
+
+    if(!authToken)
+    {
+        res.status(401).json({msg: 'Unauthorize user'})
+    }
+    else {
+    const Students = await Student.find({}).sort({createdAt: -1})
     res.status(200).json({ Students })
+    }
 })
 
 const addStudent = asyncWrapper(async (req, res) => {
