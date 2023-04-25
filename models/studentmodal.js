@@ -39,6 +39,30 @@ const StudentSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'must provide total fees'],
   },
+  registrationfees: {
+    type: Number,
+    required: [true, 'must provide registration fees'],
+  },
+  registrationDate: {
+    type: String,
+    required: [true, 'must provide registration Date'],
+  },
+  secondfees: {
+    type: Number,
+    required: [true, 'must provide second installment fees'],
+  },
+  secondfeesDate: {
+    type: String,
+    required: [true, 'must provide second installment fees date'],
+  },
+  thirdfees: {
+    type: Number,
+    required: [true, 'must provide third installment fees'],
+  },
+  thirdfeesDate: {
+    type: String,
+    required: [true, 'must provide third installment fees date'],
+  },
   admissionDate: {
     type: String,
     required: [true, 'must provide admission date'],

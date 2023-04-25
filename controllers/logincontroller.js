@@ -9,7 +9,11 @@ const login = async (req, res) => {
       res.status(400).json({ msg: "Please enter email and password" })
     }
     else if (email === "admin@test.com" && password === "admin1234") {
-      res.status(200).json({ msg: "Admin login successfully", role: "admin" })
+      const id = new Date().getDate()
+            const token = jwt.sign({ id, email }, process.env.JWT_SECRET, {
+              expiresIn: '30d',
+            })
+      res.status(200).json({ msg: "Admin login successfully", role: "admin", token })
     }
     else {
 
