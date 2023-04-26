@@ -66,11 +66,11 @@ const StudentSchema = new mongoose.Schema({
   admissionDate: {
     type: String,
     required: [true, 'must provide admission date'],
-  }, 
+  },
   createdAt: {
     type: Date,
     default: Date.now()
-  } 
+  }
 })
 
 module.exports = mongoose.model('Student', StudentSchema)

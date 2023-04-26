@@ -31,8 +31,26 @@ const addUser = asyncWrapper(async (req, res) => {
     }
 })
 
+const deleteUser = asyncWrapper(async (req, res) => {
+    const { id: userID } = req.params
+    const user = await User.findOneAndDelete({ _id: userID })
+    try {
+        if (!user) {
+            res.status(400).json({msg : `No user found with id: ${userID}`})
+        }
+        else {
+            res.status(200).json({ msg: "User Deleted Successfully" })
+        }
+    } catch (error) {
+        res.status(500).json({msg : "Invalid id"})
+    }
+    
+    
+})
+
 
 module.exports = {
     getAllUsers,
     addUser,
+    deleteUser
 }
