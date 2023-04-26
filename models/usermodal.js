@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     maxlength: [20, 'name can not be more than 20 characters'],
   },
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  }
 })
 
 module.exports = mongoose.model('UserModal', UserSchema)

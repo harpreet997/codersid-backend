@@ -17,13 +17,18 @@ const getAllStudents = asyncWrapper(async (req, res) => {
 })
 
 const addStudent = asyncWrapper(async (req, res) => {
-    const student = await Student.create(req.body)
+    try {
+        const student = await Student.create(req.body)
     if (!student) {
         return next(createCustomError(`Please fill all the required fields`, 500))
     }
     else {
         res.status(201).json({ msg: "Student Added successfully" })
     }
+    } catch (error) {
+        res.status(400).json({ msg: "Student already exists" })
+    }
+    
 })
 
 
