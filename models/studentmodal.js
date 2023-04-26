@@ -41,29 +41,48 @@ const StudentSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'must provide total fees'],
   },
-  registrationfees: {
-    type: Number,
-    required: [true, 'must provide registration fees'],
+
+  registration: {
+    registrationfees: {
+      type: Number,
+      required: [true, 'must provide registration fees'],
+    },
+    registrationDate: {
+      type: String,
+      required: [true, 'must provide registration Date'],
+    },
+    registrationPaymentStatus: {
+      type: String,
+      default: "unpaid"
+    }
   },
-  registrationDate: {
-    type: String,
-    required: [true, 'must provide registration Date'],
+  secondInstallment: {
+    secondInstallmentfees: {
+      type: Number,
+      required: [true, 'must provide second installment fees'],
+    },
+    secondInstallmentDate: {
+      type: String,
+      required: [true, 'must provide second installment fees date'],
+    },
+    secondInstallmentPaymentStatus: {
+      type: String,
+      default: "unpaid"
+    }
   },
-  secondfees: {
-    type: Number,
-    required: [true, 'must provide second installment fees'],
-  },
-  secondfeesDate: {
-    type: String,
-    required: [true, 'must provide second installment fees date'],
-  },
-  thirdfees: {
-    type: Number,
-    required: [true, 'must provide third installment fees'],
-  },
-  thirdfeesDate: {
-    type: String,
-    required: [true, 'must provide third installment fees date'],
+  thirdInstallment: {
+    thirdInstallmentfees: {
+      type: Number,
+      required: [true, 'must provide third installment fees'],
+    },
+    thirdInstallmentDate: {
+      type: String,
+      required: [true, 'must provide third installment fees date'],
+    },
+    thirdInstallmentPaymentStatus: {
+      type: String,
+      default: "unpaid"
+    }
   },
   admissionDate: {
     type: String,
