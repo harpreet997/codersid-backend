@@ -84,10 +84,6 @@ const StudentSchema = new mongoose.Schema({
       default: "unpaid"
     }
   },
-  admissionDate: {
-    type: String,
-    required: [true, 'must provide admission date'],
-  },
   createdAt: {
     type: Date,
     default: Date.now()

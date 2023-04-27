@@ -6,6 +6,7 @@ const students = require('./routes/studentroute');
 const login = require('./routes/loginroute');
 const admin = require('./routes/adminroute');
 const user = require('./routes/userroute');
+const batch = require('./routes/batchroute');
 const bodyParser = require('body-parser')
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
@@ -30,6 +31,7 @@ const start = async () => {
 app.use('/createAdmin', admin);
 app.use('/api/students', students);
 app.use('/api/user', user);
+app.use('/api/batch', batch);
 app.use('/login',login );
 
 
