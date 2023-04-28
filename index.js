@@ -7,7 +7,9 @@ const login = require('./routes/loginroute');
 const admin = require('./routes/adminroute');
 const user = require('./routes/userroute');
 const batch = require('./routes/batchroute');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const swaggerDoc = require('swagger-ui-express');
+const swaggerDocumentation = require('./helper/documentation');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
 const app = express();
@@ -17,6 +19,10 @@ app.use(cors());
 app.use(errorHandlerMiddleware);
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
+
+app.use('/documentation', swaggerDoc.serve);
+app.use('/documentation', swaggerDoc.setup(swaggerDocumentation));
+
 
 const start = async () => {
     try {
@@ -33,6 +39,8 @@ app.use('/api/students', students);
 app.use('/api/user', user);
 app.use('/api/batch', batch);
 app.use('/login',login );
+
+
 
 
 start();

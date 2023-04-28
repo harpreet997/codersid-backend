@@ -49,7 +49,7 @@ const StudentSchema = new mongoose.Schema({
     },
     registrationDate: {
       type: String,
-      required: [true, 'must provide registration Date'],
+      required: [false, 'must provide registration Date'],
     },
     registrationPaymentStatus: {
       type: String,
@@ -63,7 +63,7 @@ const StudentSchema = new mongoose.Schema({
     },
     secondInstallmentDate: {
       type: String,
-      required: [true, 'must provide second installment fees date'],
+      required: [false, 'must provide second installment fees date'],
     },
     secondInstallmentPaymentStatus: {
       type: String,
@@ -77,7 +77,7 @@ const StudentSchema = new mongoose.Schema({
     },
     thirdInstallmentDate: {
       type: String,
-      required: [true, 'must provide third installment fees date'],
+      required: [false, 'must provide third installment fees date'],
     },
     thirdInstallmentPaymentStatus: {
       type: String,

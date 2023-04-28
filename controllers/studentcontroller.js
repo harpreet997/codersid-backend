@@ -26,13 +26,27 @@ const addStudent = asyncWrapper(async (req, res) => {
         res.status(201).json({ msg: "Student Added successfully" })
     }
     } catch (error) {
-        res.status(400).json({ msg: "Student already exists" })
+        res.status(400).json({ msg: error.errors })
+    }  
+})
+
+const editStudent = asyncWrapper(async (req, res, next) => {
+    const { id: studentID } = req.params
+    const product = await Student.findOneAndUpdate({ _id: studentID }, req.body, {
+        new: true,
+        runValidators: true,
+    })
+    if (!product) {
+        return next(createCustomError(`No Product with id : ${studentID}`, 400))
     }
-    
+    else {
+        res.status(200).json({ msg: "Payment Details Updated Successfully" })
+    }
 })
 
 
 module.exports = {
     getAllStudents,
     addStudent,
+    editStudent
 }
