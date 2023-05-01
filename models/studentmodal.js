@@ -84,6 +84,22 @@ const StudentSchema = new mongoose.Schema({
       default: "unpaid"
     }
   },
+
+  fourthInstallment: {
+    fourthInstallmentfees: {
+      type: Number,
+    },
+    fourthInstallmentDate: {
+      type: String,   
+    },
+    fourthInstallmentPaymentStatus: {
+      type: String,     
+    }
+  },
+  BalanceAmount: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now()
