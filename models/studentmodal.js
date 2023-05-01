@@ -88,12 +88,15 @@ const StudentSchema = new mongoose.Schema({
   fourthInstallment: {
     fourthInstallmentfees: {
       type: Number,
+      default: 0
     },
     fourthInstallmentDate: {
-      type: String,   
+      type: String, 
+      default: "" 
     },
     fourthInstallmentPaymentStatus: {
-      type: String,     
+      type: String, 
+      default: "Not Paid"    
     }
   },
   BalanceAmount: {
