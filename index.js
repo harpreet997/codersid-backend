@@ -7,6 +7,7 @@ const login = require('./routes/loginroute');
 const admin = require('./routes/adminroute');
 const user = require('./routes/userroute');
 const batch = require('./routes/batchroute');
+const course = require('./routes/courseroute');
 const bodyParser = require('body-parser');
 const swaggerDoc = require('swagger-ui-express');
 const swaggerDocumentation = require('./helper/documentation');
@@ -38,6 +39,7 @@ app.use('/createAdmin', admin);
 app.use('/api/students', students);
 app.use('/api/user', user);
 app.use('/api/batch', batch);
+app.use('/api/course', course);
 app.use('/login',login );
 
 
