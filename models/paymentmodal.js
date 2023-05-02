@@ -44,6 +44,9 @@ const PaymentSchema = new mongoose.Schema({
     PaymentMode: {
         type: String,
     },
+    PaymentType: {
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now()
