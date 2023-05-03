@@ -18,7 +18,13 @@ const getAllPayments = asyncWrapper(async (req, res) => {
 
 const createPayment = asyncWrapper(async (req, res) => {
     try {
-        const payment = await Payment.create(req.body)
+        const Payments = await Payment.find({})
+        const length = Payments.length;
+        let newPayment = {
+            ...req.body,
+            id: length + 1
+        }
+        const payment = await Payment.create(newPayment)
     if (!payment) {
         return next(createCustomError(`Please fill all the required fields`, 500))
     }

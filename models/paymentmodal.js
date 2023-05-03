@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
 const PaymentSchema = new mongoose.Schema({
+    id: {
+        type: Number,
+      },
     StudentName: {
         type: String,
     },
