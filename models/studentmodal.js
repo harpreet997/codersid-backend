@@ -6,7 +6,7 @@ const StudentSchema = new mongoose.Schema({
     required: [true, 'must provide product student name'],
     trim: true,
     maxlength: [20, 'student name can not be more than 20 characters'],
-    unique: true
+    // unique: true
   },
   batchname: {
     type: String,
@@ -25,7 +25,7 @@ const StudentSchema = new mongoose.Schema({
     required: [true, 'must provide email id'],
     trim: true,
     maxlength: [30, 'email can not be more than 30 characters'],
-    unique: true
+    // unique: true
   },
   contactdetails: {
     type: Number,
