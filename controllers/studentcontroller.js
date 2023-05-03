@@ -6,28 +6,34 @@ const { createCustomError } = require('../errors/custom-error')
 const getAllStudents = asyncWrapper(async (req, res) => {
     const authToken = req.headers.authorization;
 
-    if(!authToken)
-    {
-        res.status(401).json({msg: 'Unauthorize user'})
+    if (!authToken) {
+        res.status(401).json({ msg: 'Unauthorize user' })
     }
     else {
-    const Students = await Student.find({}).sort({createdAt: -1})
-    res.status(200).json({ Students })
+        const Students = await Student.find({}).sort({ createdAt: -1 })
+        res.status(200).json({ Students })
     }
 })
 
 const addStudent = asyncWrapper(async (req, res) => {
     try {
-        const student = await Student.create(req.body)
-    if (!student) {
-        return next(createCustomError(`Please fill all the required fields`, 500))
-    }
-    else {
-        res.status(201).json({ msg: "Student Added successfully" })
-    }
+        const Students = await Student.find({})
+        const length = Students.length;
+        let newStudent = {
+            ...req.body,
+            id: length + 1
+        }
+        const student = await Student.create(newStudent)
+
+        if (!student) {
+            return next(createCustomError(`Please fill all the required fields`, 500))
+        }
+        else {
+            res.status(201).json({ msg: "Student Added successfully" })
+        }
     } catch (error) {
-        res.status(400).json({ msg: error.errors })
-    }  
+        console.log(error);
+    }
 })
 
 const editStudent = asyncWrapper(async (req, res, next) => {

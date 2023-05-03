@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
 const StudentSchema = new mongoose.Schema({
+  id: {
+    type: Number,
+  },
   studentname: {
     type: String,
     required: [true, 'must provide product student name'],
