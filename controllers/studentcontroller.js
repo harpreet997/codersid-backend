@@ -10,7 +10,7 @@ const getAllStudents = asyncWrapper(async (req, res) => {
         res.status(401).json({ msg: 'Unauthorize user' })
     }
     else {
-        const Students = await Student.find({}).sort({ createdAt: -1 })
+        const Students = await Student.find({})
         res.status(200).json({ Students })
     }
 })
