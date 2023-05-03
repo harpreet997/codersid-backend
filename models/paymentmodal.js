@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const PaymentSchema = new mongoose.Schema({
-    studentname: {
+    StudentName: {
         type: String,
     },
     batchname: {
@@ -10,7 +10,7 @@ const PaymentSchema = new mongoose.Schema({
     course: {
         type: String,
     },
-    emailid: {
+    Email: {
         type: String,
     },
     contactdetails: {
