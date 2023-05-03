@@ -26,7 +26,8 @@ const createPayment = asyncWrapper(async (req, res) => {
         res.status(201).json({ msg: "Payment Added successfully" })
     }
     } catch (error) {
-        res.status(400).json({ msg: error.errors })
+        // res.status(400).json({ msg: error.errors })
+        console.log(error);
     }  
 })
 
