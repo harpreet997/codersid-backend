@@ -5,7 +5,6 @@ const BatchSchema = new mongoose.Schema({
         type: String,
         required: [true, 'must provide batch name'],
         trim: true,
-        maxlength: [20, 'batch name can not be more than 20 characters'],
         unique: true
     },
     createdAt: {

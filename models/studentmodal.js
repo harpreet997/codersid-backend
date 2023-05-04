@@ -8,26 +8,22 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: [true, 'must provide product student name'],
     trim: true,
-    maxlength: [20, 'student name can not be more than 20 characters'],
     // unique: true
   },
   batchname: {
     type: String,
     required: [true, 'must provide product batch name'],
     trim: true,
-    maxlength: [20, 'batch name can not be more than 20 characters'],
   },
   course: {
     type: String,
     required: [true, 'must provide course name'],
     trim: true,
-    maxlength: [20, 'course name can not be more than 20 characters'],
   },
   emailid: {
     type: String,
     required: [true, 'must provide email id'],
     trim: true,
-    maxlength: [30, 'email can not be more than 30 characters'],
     unique: true
   },
   contactdetails: {
@@ -38,7 +34,6 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: [true, 'must provide address'],
     trim: true,
-    maxlength: [20, 'address can not be more than 20 characters'],
   },
   totalfees: {
     type: Number,
