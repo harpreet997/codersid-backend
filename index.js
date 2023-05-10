@@ -8,6 +8,7 @@ const admin = require('./routes/adminroute');
 const user = require('./routes/userroute');
 const batch = require('./routes/batchroute');
 const course = require('./routes/courseroute');
+const expensecategory = require('./routes/expensecategoryroute');
 const payment = require('./routes/paymentroute');
 const bodyParser = require('body-parser');
 const swaggerDoc = require('swagger-ui-express');
@@ -41,6 +42,7 @@ app.use('/api/students', students);
 app.use('/api/user', user);
 app.use('/api/batch', batch);
 app.use('/api/course', course);
+app.use('/api/category', expensecategory);
 app.use('/api/payment', payment);
 app.use('/login',login );
 
