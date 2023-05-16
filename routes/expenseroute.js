@@ -16,6 +16,6 @@ const upload = multer({ storage: storage});
 const {getAllExpenses, addExpense, deleteExpense} = require('../controllers/expensecontroller')
 
 expenseRoute.get('/', getAllExpenses);
-expenseRoute.post('/', upload.single('bill'), addExpense);
+expenseRoute.post('/', addExpense);
 expenseRoute.delete('/:id', deleteExpense)
 module.exports = expenseRoute;
