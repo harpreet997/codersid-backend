@@ -15,13 +15,14 @@ const getAllExpenses = asyncWrapper(async (req, res) => {
 })
 
 const addExpense= asyncWrapper(async (req, res) => {
+    console.log(req.body)
     try {
         var expensebody = new Expense({
             categoryName: req.body.categoryName,
             expenseName: req.body.expenseName,
             vendor: req.body.vendor,
             amount: req.body.amount,
-            // bill: `/uploads/${req.file.filename}`
+            bill: `/uploads/${req.file.filename}`
         })
         
         const expense = await expensebody.save();
