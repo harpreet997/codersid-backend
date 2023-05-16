@@ -15,6 +15,7 @@ const getAllCourses = asyncWrapper(async (req, res) => {
 })
 
 const addCourse = asyncWrapper(async (req, res) => {
+    console.log(req.body)
     try {
     const {courseName} = req.body
     if(courseName === "")

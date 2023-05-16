@@ -22,10 +22,8 @@ const ExpenseSchema = new mongoose.Schema({
         required: [true, 'must provide amount'],
         trim: true,
     },
-    bill: { 
-        type: String, 
-        default: '',
-        trim: true,
+    bill: {
+        type: String,
     },
     createdAt: {
         type: Date,
