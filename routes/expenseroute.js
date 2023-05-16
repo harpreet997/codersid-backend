@@ -1,7 +1,21 @@
 const express = require('express');
-const router = express.Router()
-const {getAllExpenses, addExpense} = require('../controllers/expensecontroller')
+const multer = require('multer');
+const expenseRoute = express();
 
-router.route('/').get(getAllExpenses).post(addExpense);
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      return cb(null, "./uploads")
+    },
+    filename: function (req, file, cb) {
+      return cb(null, `${Date.now()}-${file.originalname}`)
+    }
+  })
 
-module.exports = router;
+const upload = multer({ storage: storage});
+
+const {getAllExpenses, addExpense, deleteExpense} = require('../controllers/expensecontroller')
+
+expenseRoute.get('/', getAllExpenses);
+expenseRoute.post('/', upload.single('bill'), addExpense);
+expenseRoute.delete('/:id', deleteExpense)
+module.exports = expenseRoute;

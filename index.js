@@ -12,8 +12,7 @@ const expensecategory = require('./routes/expensecategoryroute');
 const expense = require('./routes/expenseroute');
 const payment = require('./routes/paymentroute');
 const bodyParser = require('body-parser');
-const swaggerDoc = require('swagger-ui-express');
-const swaggerDocumentation = require('./helper/documentation');
+
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
 const app = express();
@@ -23,9 +22,8 @@ app.use(cors());
 app.use(errorHandlerMiddleware);
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
-
-app.use('/documentation', swaggerDoc.serve);
-app.use('/documentation', swaggerDoc.setup(swaggerDocumentation));
+app.use(express.urlencoded({extended: false}))
+app.use("/uploads", express.static('uploads'))
 
 
 const start = async () => {

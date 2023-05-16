@@ -16,7 +16,15 @@ const getAllExpenses = asyncWrapper(async (req, res) => {
 
 const addExpense= asyncWrapper(async (req, res) => {
     try {
-        const expense = await Expense.create(req.body)
+        var expensebody = new Expense({
+            categoryName: req.body.categoryName,
+            expenseName: req.body.expenseName,
+            vendor: req.body.vendor,
+            amount: req.body.amount,
+            bill: `/uploads/${req.file.filename}`
+        })
+        
+        const expense = await expensebody.save();
     if(!expense)
     {
         res.status(400).json({ msg : "Please fill all the fields"})
@@ -25,7 +33,22 @@ const addExpense= asyncWrapper(async (req, res) => {
         res.status(201).json({ expense,  msg: "Expense Created successfully" })
     }
     } catch (error) {
-        res.status(400).json({ msg: "Expense already exists" })
+        console.log(error);
+    }
+})
+
+const deleteExpense = asyncWrapper(async (req, res) => {
+    const { id: expenseID } = req.params
+    const expense = await Expense.findOneAndDelete({ _id: expenseID })
+    try {
+        if (!expense) {
+            res.status(400).json({msg : `No batch found with id: ${expenseID}`})
+        }
+        else {
+            res.status(200).json({ msg: "Expense Deleted Successfully" })
+        }
+    } catch (error) {
+        res.status(500).json({msg : "Invalid expense id"})
     }
 })
 
@@ -33,4 +56,5 @@ const addExpense= asyncWrapper(async (req, res) => {
 module.exports = {
     getAllExpenses,
     addExpense,
+    deleteExpense
 }
