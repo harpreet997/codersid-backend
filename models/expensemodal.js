@@ -23,7 +23,14 @@ const ExpenseSchema = new mongoose.Schema({
         trim: true,
     },
     bill: {
-        type: String,
+        public_id: {
+            type: String,
+            required: true,
+        },
+        url: {
+            type: String,
+            required: true
+        }
     },
     createdAt: {
         type: Date,

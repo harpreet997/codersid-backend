@@ -1,6 +1,7 @@
 
 const Expense = require('../models/expensemodal');
 const asyncWrapper = require('../middleware/async')
+const cloudinary = require('../cloudinary/cloudinary');
 
 const getAllExpenses = asyncWrapper(async (req, res) => {
     const authToken = req.headers.authorization;
@@ -38,20 +39,32 @@ const getAllExpenses = asyncWrapper(async (req, res) => {
 //     }
 // })
 
-const addExpense = asyncWrapper(async (req, res) => {
+const addExpense = async (req, res) => {
+    const {categoryName, expenseName, vendor, amount, bill} = req.body;
     try {
-        const expense = await Expense.create(req.body)
-    if(!expense)
-    {
-        res.status(400).json({ msg : "Please fill all the fields"})
-    }
-    else {
-        res.status(201).json({ expense,  msg: "Expense Created successfully" })
-    }
+        const result = await cloudinary.uploader.upload(bill, {
+            folder: "expenses",
+        })
+        const expense = await Expense.create({
+            categoryName,
+            expenseName,
+            vendor,
+            amount,
+            bill: {
+                public_id: result.public_id,
+                url: result.secure_url
+            }
+        });
+        res.status(201).json({
+            msg: "Expense Added Succesfully",
+            expense
+        })
     } catch (error) {
-        console.log(error);
+        res.status(400).json({ msg: "Expense Already Exists" })
+        
+       
     }
-})
+}
 
 
 const deleteExpense = asyncWrapper(async (req, res) => {
