@@ -22,6 +22,16 @@ const ExpenseSchema = new mongoose.Schema({
         required: [true, 'must provide amount'],
         trim: true,
     },
+    bill: {
+        public_id: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        }
+    }, 
     invoiceNumber: {
         type: String,
         required: [true, 'must provide invoice Number'],

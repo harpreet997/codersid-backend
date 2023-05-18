@@ -15,19 +15,18 @@ const getAllExpenses = asyncWrapper(async (req, res) => {
 })
 
 
-const addExpense = asyncWrapper(async (req, res) => {
-    try {
-        const expense = await Expense.create(req.body)
-    if (!expense) {
-        return next(createCustomError(`Please fill all the required fields`, 500))
-    }
-    else {
-        res.status(201).json({ msg: "Expense Added successfully" })
-    }
-    } catch (error) {
-        res.status(400).json({ msg: "Expense Already Exists" })
-    }  
-})
+//     try {
+//         const expense = await Expense.create(req.body)
+//     if (!expense) {
+//         return next(createCustomError(`Please fill all the required fields`, 500))
+//     }
+//     else {
+//         res.status(201).json({ msg: "Expense Added successfully" })
+//     }
+//     } catch (error) {
+//         res.status(400).json({ msg: "Expense Already Exists" })
+//     }  
+// })
 
 // const addExpense= asyncWrapper(async (req, res) => {
 //     console.log(req.body)
@@ -54,32 +53,33 @@ const addExpense = asyncWrapper(async (req, res) => {
 //     }
 // })
 
-// const addExpense = async (req, res) => {
-//     const {categoryName, expenseName, vendor, amount, bill} = req.body;
-//     try {
-//         const result = await cloudinary.uploader.upload(bill, {
-//             folder: "expenses",
-//         })
-//         const expense = await Expense.create({
-//             categoryName,
-//             expenseName,
-//             vendor,
-//             amount,
-//             bill: {
-//                 public_id: result.public_id,
-//                 url: result.secure_url
-//             }
-//         });
-//         res.status(201).json({
-//             msg: "Expense Added Succesfully",
-//             expense
-//         })
-//     } catch (error) {
-//         // res.status(400).json({ msg: "Expense Already Exists" })
-//         console.log(error);
+const addExpense = async (req, res) => {
+    const {categoryName, expenseName, vendor, amount, bill, invoiceNumber} = req.body;
+    try {
+        const result = await cloudinary.uploader.upload(bill, {
+            folder: "expenses",
+        })
+        const expense = await Expense.create({
+            categoryName,
+            expenseName,
+            vendor,
+            amount,
+            bill: {
+                public_id: result.public_id,
+                url: result.secure_url
+            },
+            invoiceNumber
+        });
+        res.status(201).json({
+            msg: "Expense Added Succesfully",
+            expense
+        })
+    } catch (error) {
+        // res.status(400).json({ msg: "Expense Already Exists" })
+        console.log(error);
        
-//     }
-// }
+    }
+}
 
 
 const deleteExpense = asyncWrapper(async (req, res) => {
