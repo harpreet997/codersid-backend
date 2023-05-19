@@ -7,6 +7,11 @@ const BatchSchema = new mongoose.Schema({
         trim: true,
         unique: true
     },
+    batchPrice: {
+        type: Number,
+        required: [true, 'must provide batch price'],
+        trim: true,
+    },
     createdAt: {
         type: Date,
         default: Date.now()
