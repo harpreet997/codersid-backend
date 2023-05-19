@@ -7,6 +7,11 @@ const CourseSchema = new mongoose.Schema({
         trim: true,
         unique: true
     },
+    coursePrice: {
+        type: Number,
+        required: [true, 'must provide course price'],
+        trim: true,
+    },
     createdAt: {
         type: Date,
         default: Date.now()
