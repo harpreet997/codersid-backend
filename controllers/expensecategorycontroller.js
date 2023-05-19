@@ -9,7 +9,7 @@ const getAllExpenseCategory = asyncWrapper(async (req, res) => {
         res.status(401).json({msg: 'Unauthorize user'})
     }
     else{
-    const Categories = await Category.find({})
+    const Categories = await Category.find({}).sort({createdAt: -1})
     res.status(200).json({ Categories })
     }
 })

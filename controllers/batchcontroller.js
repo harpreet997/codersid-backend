@@ -9,7 +9,7 @@ const getAllBatches = asyncWrapper(async (req, res) => {
         res.status(401).json({msg: 'Unauthorize user'})
     }
     else{
-    const Batches = await Batch.find({})
+    const Batches = await Batch.find({}).sort({createdAt: -1})
     res.status(200).json({ Batches })
     }
 })

@@ -9,7 +9,7 @@ const getAllExpenses = asyncWrapper(async (req, res) => {
         res.status(401).json({ msg: 'Unauthorize user' })
     }
     else {
-        const Expenses = await Expense.find({})
+        const Expenses = await Expense.find({}).sort({createdAt: -1})
         res.status(200).json({ Expenses })
     }
 })

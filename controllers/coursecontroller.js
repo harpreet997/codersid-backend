@@ -9,7 +9,7 @@ const getAllCourses = asyncWrapper(async (req, res) => {
         res.status(401).json({msg: 'Unauthorize user'})
     }
     else{
-    const Courses = await Course.find({})
+    const Courses = await Course.find({}).sort({createdAt: -1})
     res.status(200).json({ Courses })
     }
 })
