@@ -1,11 +1,13 @@
 
 const Payment = require('../models/paymentmodal');
+const Expense = require('../models/expensemodal');
 const asyncWrapper = require('../middleware/async')
 const { createCustomError } = require('../errors/custom-error')
 
 const getAllPayments = asyncWrapper(async (req, res) => {
     const Payments = await Payment.find({}).sort({id: -1})
-    res.status(200).json({ Payments })
+    const Expenses = await Expense.find({}).sort({createdAt: -1})
+    res.status(200).json({ Payments , Expenses})
     }
 )
 
