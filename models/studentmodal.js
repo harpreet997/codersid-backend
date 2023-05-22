@@ -8,7 +8,7 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: [true, 'must provide product student name'],
     trim: true,
-    // unique: true
+    unique: true
   },
   batchname: {
     type: String,

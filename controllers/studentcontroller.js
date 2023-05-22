@@ -10,7 +10,7 @@ const getAllStudents = asyncWrapper(async (req, res) => {
         res.status(401).json({ msg: 'Unauthorize user' })
     }
     else {
-        const Students = await Student.find({}).sort({id: -1})
+        const Students = await Student.find({}).sort({ id: -1 })
         res.status(200).json({ Students })
     }
 })
@@ -32,7 +32,7 @@ const addStudent = asyncWrapper(async (req, res) => {
             res.status(201).json({ msg: "Student Added successfully" })
         }
     } catch (error) {
-        console.log(error);
+        res.status(400).json({ msg: "Student Already Exists" })
     }
 })
 
