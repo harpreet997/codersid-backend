@@ -11,6 +11,7 @@ const course = require('./routes/courseroute');
 const expensecategory = require('./routes/expensecategoryroute');
 const expense = require('./routes/expenseroute');
 const payment = require('./routes/paymentroute');
+const paymentWithoutToken = require('./routes/paymentwithouttokenroute');
 const bodyParser = require('body-parser');
 
 const errorHandlerMiddleware = require('./middleware/error-handler');
@@ -44,6 +45,7 @@ app.use('/api/course', course);
 app.use('/api/category', expensecategory);
 app.use('/api/expense', expense);
 app.use('/api/payment', payment);
+app.use('/api/paymentrecords', paymentWithoutToken);
 app.use('/login',login );
 
 start();
