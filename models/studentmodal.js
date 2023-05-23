@@ -94,7 +94,7 @@ const StudentSchema = new mongoose.Schema({
     },
     fourthInstallmentPaymentStatus: {
       type: String, 
-      default: "Not Paid"    
+      default: ""    
     }
   },
   BalanceAmount: {
