@@ -90,11 +90,11 @@ const StudentSchema = new mongoose.Schema({
     },
     fourthInstallmentDate: {
       type: String, 
-      default: "" 
+      default: "NA" 
     },
     fourthInstallmentPaymentStatus: {
       type: String, 
-      default: ""    
+      default: "NA"    
     }
   },
   BalanceAmount: {
