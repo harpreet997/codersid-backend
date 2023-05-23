@@ -29,6 +29,21 @@ const addExpense = asyncWrapper(async (req, res) => {
     }  
 })
 
+
+const editExpense = asyncWrapper(async (req, res, next) => {
+    const { id: expenseID } = req.params
+    const expense = await Expense.findOneAndUpdate({ _id: expenseID }, req.body, {
+        new: true,
+        runValidators: true,
+    })
+    if (!expense) {
+        return next(createCustomError(`No Product with id : ${expenseID}`, 400))
+    }
+    else {
+        res.status(200).json({ msg: "Expense Updated Successfully" })
+    }
+})
+
 // const addExpense= asyncWrapper(async (req, res) => {
 //     console.log(req.body)
 //     console.log(req.body.bill)
@@ -101,5 +116,6 @@ const deleteExpense = asyncWrapper(async (req, res) => {
 module.exports = {
     getAllExpenses,
     addExpense,
-    deleteExpense
+    deleteExpense,
+    editExpense
 }

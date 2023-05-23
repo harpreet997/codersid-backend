@@ -15,11 +15,12 @@ const storage = multer.diskStorage({
 
 // const upload = multer({ storage: storage});
 
-const {getAllExpenses, addExpense, deleteExpense} = require('../controllers/expensecontroller')
+const {getAllExpenses, addExpense, deleteExpense, editExpense} = require('../controllers/expensecontroller')
 // router.route('/').get(getAllExpenses).post(addExpense);
 
 
 expenseRoute.get('/', getAllExpenses);
 expenseRoute.post('/', addExpense);
+expenseRoute.patch('/:id', editExpense);
 expenseRoute.delete('/:id', deleteExpense)
 module.exports = expenseRoute;

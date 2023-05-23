@@ -11,7 +11,7 @@ const getAllPayments = asyncWrapper(async (req, res) => {
         res.status(401).json({msg: 'Unauthorize user'})
     }
     else {
-    const Payments = await Payment.find({}).sort({id: -1})
+    const Payments = await Payment.find({}).sort({createdAt: -1})
     res.status(200).json({ Payments })
     }
 })
