@@ -17,7 +17,7 @@ const ExpenseSchema = new mongoose.Schema({
         required: [true, 'must provide vendor email'],
         trim: true,
     },
-    amount: {
+    Amount: {
         type: Number,
         required: [true, 'must provide amount'],
         trim: true,
