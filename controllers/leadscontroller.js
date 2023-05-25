@@ -10,14 +10,20 @@ const getAllLeads = asyncWrapper(async (req, res) => {
         res.status(401).json({ msg: 'Unauthorize user' })
     }
     else {
-        const Leads = await Lead.find({}).sort({ createdAt: -1 })
+        const Leads = await Lead.find({}).sort({ id: -1 })
         res.status(200).json({ Leads })
     }
 })
 
 const addLead = asyncWrapper(async (req, res) => {
     try {
-        const lead = await Lead.create(req.body)
+        const Leads = await Lead.find({})
+        const length = Leads.length;
+        let newLead = {
+            ...req.body,
+            id: length + 1
+        }
+        const lead = await Lead.create(newLead)
     if (!lead) {
         return next(createCustomError(`Please fill all the required fields`, 500))
     }
@@ -31,11 +37,11 @@ const addLead = asyncWrapper(async (req, res) => {
 
 const editLead = asyncWrapper(async (req, res, next) => {
     const { id: leadID } = req.params
-    const product = await Lead.findOneAndUpdate({ _id: leadID }, req.body, {
+    const lead = await Lead.findOneAndUpdate({ _id: leadID }, req.body, {
         new: true,
         runValidators: true,
     })
-    if (!product) {
+    if (!lead) {
         return next(createCustomError(`No Lead with id : ${leadID}`, 400))
     }
     else {
@@ -43,9 +49,25 @@ const editLead = asyncWrapper(async (req, res, next) => {
     }
 })
 
+const deleteLead = asyncWrapper(async (req, res) => {
+    const { id: leadID } = req.params
+    const lead = await Lead.findOneAndDelete({ _id: leadID })
+    try {
+        if (!lead) {
+            res.status(400).json({ msg: `No Lead found with id: ${leadID}` })
+        }
+        else {
+            res.status(200).json({ msg: "Lead Deleted Successfully" })
+        }
+    } catch (error) {
+        res.status(500).json({ msg: "Invalid Lead id" })
+    }
+})
+
 
 module.exports = {
     getAllLeads,
     addLead,
-    editLead
+    editLead,
+    deleteLead
 }
