@@ -42,12 +42,13 @@ const LeadsSchema = new mongoose.Schema({
   comments: [
     {
       type: String,
+      required: [true, 'must provide comments'],
     }
   ],
   status: {
     type: String
   },
-  referralName: {
+  source: {
     type: String,
   },
   createdAt: {
