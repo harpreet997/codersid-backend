@@ -13,6 +13,8 @@ const expense = require('./routes/expenseroute');
 const payment = require('./routes/paymentroute');
 const paymentWithoutToken = require('./routes/paymentwithouttokenroute');
 const leads = require('./routes/leadsroute');
+const walkins = require('./routes/walkinroute');
+const comments = require('./routes/commentroute');
 const bodyParser = require('body-parser');
 
 const errorHandlerMiddleware = require('./middleware/error-handler');
@@ -47,6 +49,8 @@ app.use('/api/category', expensecategory);
 app.use('/api/expense', expense);
 app.use('/api/payment', payment);
 app.use('/api/leads', leads);
+app.use('/api/walkins', walkins);
+app.use('/api/comments', comments);
 app.use('/api/paymentrecords', paymentWithoutToken);
 app.use('/login',login );
 

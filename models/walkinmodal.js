@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
-const moment = require('moment');
 
-const LeadsSchema = new mongoose.Schema({
+const WalkinSchema = new mongoose.Schema({
   id: {
     type: Number,
   },
@@ -40,22 +39,11 @@ const LeadsSchema = new mongoose.Schema({
     type: String,
     required: [true, 'must provide employement status'],
   },
-  comments: [
+  comments : [
     {
-      comment: {
-        type: String,
-      },
-      commentAt: {
-        type: String,
-        default: moment().format('MMMM Do YYYY, h:mm:ss a')
-      }
+      type: String
     }
   ],
-  // comments : [
-  //   {
-  //     type: String
-  //   }
-  // ],
   status: {
     type: String
   },
@@ -68,4 +56,4 @@ const LeadsSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Leads', LeadsSchema)
+module.exports = mongoose.model('WalkIns', WalkinSchema)
