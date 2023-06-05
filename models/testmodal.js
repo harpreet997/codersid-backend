@@ -4,6 +4,9 @@ const TestSchema = new mongoose.Schema({
     testname: {
         type: String,
     },
+    category: {
+        type: String,
+    },
     questionslist: [{
         
     }],
