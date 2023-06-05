@@ -27,7 +27,8 @@ const addUser = asyncWrapper(async (req, res) => {
         res.status(201).json({ msg: "User Added successfully", role: "user" })
     }
     } catch (error) {
-        res.status(400).json({ msg: "User already exists" })
+        // res.status(400).json({ msg: "User already exists" })
+        console.log(error);
     }
 })
 

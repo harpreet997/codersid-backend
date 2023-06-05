@@ -18,6 +18,9 @@ const UserSchema = new mongoose.Schema({
     required: [true, 'must provide password'],
     trim: true,
   },
+  permission: [{
+    type: String
+  }], 
   createdAt: {
     type: Date,
     default: Date.now()
