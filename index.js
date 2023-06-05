@@ -17,6 +17,7 @@ const walkins = require('./routes/walkinroute');
 const comments = require('./routes/commentroute');
 const questions = require('./routes/questionroute');
 const tests = require('./routes/testroute');
+const assessmentCategory = require('./routes/assessmentcategoryroute');
 const bodyParser = require('body-parser');
 
 const errorHandlerMiddleware = require('./middleware/error-handler');
@@ -55,6 +56,7 @@ app.use('/api/walkins', walkins);
 app.use('/api/comments', comments);
 app.use('/api/questions', questions);
 app.use('/api/tests', tests);
+app.use('/api/assessmentCategory', assessmentCategory);
 app.use('/api/paymentrecords', paymentWithoutToken);
 app.use('/login',login );
 
