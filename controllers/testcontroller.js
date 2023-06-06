@@ -15,6 +15,11 @@ const getAllTest = asyncWrapper(async (req, res) => {
     }
 })
 
+const getSingleTest = async (req, res) => {
+    const test = await Test.findOne({ _id: req.params.id })
+    res.json({ id: test })
+}
+
 const createTest = asyncWrapper(async (req, res) => {
     try {
         const test = await Test.create(req.body)
@@ -49,5 +54,6 @@ const deleteTest = asyncWrapper(async (req, res) => {
 module.exports = {
     getAllTest,
     createTest,
-    deleteTest
+    deleteTest,
+    getSingleTest
 }
