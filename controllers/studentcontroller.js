@@ -1,5 +1,6 @@
 
 const Student = require('../models/studentmodal');
+const TestPerformance = require('../models/testperformancemodal');
 const asyncWrapper = require('../middleware/async')
 const { createCustomError } = require('../errors/custom-error')
 
@@ -11,7 +12,8 @@ const getAllStudents = asyncWrapper(async (req, res) => {
     }
     else {
         const Students = await Student.find({}).sort({ id: -1 })
-        res.status(200).json({ Students })
+        const TestPerformances = await TestPerformance.find({})
+        res.status(200).json({ Students, TestPerformances })
     }
 })
 
@@ -51,8 +53,15 @@ const editStudent = asyncWrapper(async (req, res, next) => {
 })
 
 
+const getSingleStudentDetails = async (req, res) => {
+    const student = await Student.findOne({ _id: req.params.id })
+    res.json({ data: student })
+}
+
+
 module.exports = {
     getAllStudents,
     addStudent,
-    editStudent
+    editStudent,
+    getSingleStudentDetails
 }
