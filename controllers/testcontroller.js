@@ -57,7 +57,7 @@ const updateTest = asyncWrapper(async (req, res, next) => {
         runValidators: true,
     })
     if (!test) {
-        return next(createCustomError(`No Product with id : ${testID}`, 400))
+        return next(createCustomError(`No test found with id : ${testID}`, 400))
     }
     else {
         res.status(200).json({ msg: "Exipry Date Updated Successfully" })

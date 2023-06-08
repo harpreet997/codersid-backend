@@ -94,18 +94,32 @@ const StudentSchema = new mongoose.Schema({
       default: 0
     },
     fourthInstallmentDate: {
-      type: String, 
-      default: "NA" 
+      type: String,
+      default: "NA"
     },
     fourthInstallmentPaymentStatus: {
-      type: String, 
-      default: "NA"    
+      type: String,
+      default: "NA"
     }
   },
   BalanceAmount: {
     type: Boolean,
     default: false,
   },
+
+  testId: {
+    type: String,
+  },
+  testname: {
+    type: String,
+  },
+  category: {
+    type: String,
+  },
+  score: {
+    type: Number
+  },
+
   createdAt: {
     type: Date,
     default: Date.now()

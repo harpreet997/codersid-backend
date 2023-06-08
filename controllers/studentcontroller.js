@@ -1,6 +1,5 @@
 
 const Student = require('../models/studentmodal');
-const TestPerformance = require('../models/testperformancemodal');
 const asyncWrapper = require('../middleware/async')
 const { createCustomError } = require('../errors/custom-error')
 
@@ -12,8 +11,7 @@ const getAllStudents = asyncWrapper(async (req, res) => {
     }
     else {
         const Students = await Student.find({}).sort({ id: -1 })
-        const TestPerformances = await TestPerformance.find({})
-        res.status(200).json({ Students, TestPerformances })
+        res.status(200).json({ Students })
     }
 })
 
@@ -58,10 +56,25 @@ const getSingleStudentDetails = async (req, res) => {
     res.json({ data: student })
 }
 
+const addTestPerformanceDetails = asyncWrapper(async (req, res, next) => {
+    const { id: studentID } = req.params
+    const test = await Student.findOneAndUpdate({ _id: studentID }, req.body, {
+        new: true,
+        runValidators: true,
+    })
+    if (!test) {
+        return next(createCustomError(`No Student found with id : ${studentID}`, 400))
+    }
+    else {
+        res.status(200).json({ msg: "Performance data updated successfully" })
+    }
+})
+
 
 module.exports = {
     getAllStudents,
     addStudent,
     editStudent,
-    getSingleStudentDetails
+    getSingleStudentDetails,
+    addTestPerformanceDetails
 }
