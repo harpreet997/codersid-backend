@@ -35,6 +35,11 @@ const StudentSchema = new mongoose.Schema({
     required: [true, 'must provide address'],
     trim: true,
   },
+  referralName: {
+    type: String,
+    required: [true, 'must provide Referral Name'],
+    trim: true,
+  },
   totalfees: {
     type: Number,
     required: [true, 'must provide total fees'],

@@ -10,6 +10,9 @@ const TestSchema = new mongoose.Schema({
     questionslist: [{
         
     }],
+    expiryDate: {
+        type: String
+    },
     createdAt: {
         type: Date,
         default: Date.now()

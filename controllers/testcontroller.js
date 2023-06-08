@@ -50,10 +50,25 @@ const deleteTest = asyncWrapper(async (req, res) => {
     }
 })
 
+const updateTest = asyncWrapper(async (req, res, next) => {
+    const { id: testID } = req.params
+    const test = await Test.findOneAndUpdate({ _id: testID }, req.body, {
+        new: true,
+        runValidators: true,
+    })
+    if (!test) {
+        return next(createCustomError(`No Product with id : ${testID}`, 400))
+    }
+    else {
+        res.status(200).json({ msg: "Exipry Date Updated Successfully" })
+    }
+})
+
 
 module.exports = {
     getAllTest,
     createTest,
     deleteTest,
-    getSingleTest
+    getSingleTest,
+    updateTest
 }
