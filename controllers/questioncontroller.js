@@ -36,6 +36,20 @@ const createQuestion = asyncWrapper(async (req, res) => {
     }
 })
 
+const editQuestion = asyncWrapper(async (req, res, next) => {
+    const { id: questionID } = req.params
+    const product = await Question.findOneAndUpdate({ _id: questionID }, req.body, {
+        new: true,
+        runValidators: true,
+    })
+    if (!product) {
+        return next(createCustomError(`No Question found with id : ${questionID}`, 400))
+    }
+    else {
+        res.status(200).json({ msg: "Question Details Updated Successfully" })
+    }
+})
+
 const deleteQuestion = asyncWrapper(async (req, res) => {
     const { id: questionID } = req.params
     const question = await Question.findOneAndDelete({ _id: questionID })
@@ -69,6 +83,7 @@ const deleteAllQuestion = asyncWrapper(async (req, res) => {
 module.exports = {
     getAllQuestions,
     createQuestion,
+    editQuestion,
     deleteQuestion,
     deleteAllQuestion
 }
