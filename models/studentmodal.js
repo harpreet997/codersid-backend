@@ -107,18 +107,26 @@ const StudentSchema = new mongoose.Schema({
     default: false,
   },
 
-  testId: {
-    type: String,
-  },
-  testname: {
-    type: String,
-  },
-  category: {
-    type: String,
-  },
-  score: {
-    type: Number
-  },
+
+  testRecords: [
+    {
+      testId: {
+        type: String,
+      },
+      testname: {
+        type: String,
+      },
+      category: {
+        type: String,
+      },
+      score: {
+        type: Number
+      },
+      totalMarks: {
+        type: Number
+      }
+    }
+  ],
 
   createdAt: {
     type: Date,
