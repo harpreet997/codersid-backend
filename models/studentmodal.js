@@ -128,10 +128,12 @@ const StudentSchema = new mongoose.Schema({
     }
   ],
 
-  cgpa: {
-    type: Number,
-    default: 0
-  },
+  testResponse: [
+    {
+      questionName: [],
+      response: []
+    }
+  ],
 
   createdAt: {
     type: Date,
