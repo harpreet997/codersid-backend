@@ -124,16 +124,20 @@ const StudentSchema = new mongoose.Schema({
       },
       totalMarks: {
         type: Number
+      },
+      testResponse: {
+        questionName: [],
+        response: []
       }
     }
   ],
 
-  testResponse: [
-    {
-      questionName: [],
-      response: []
-    }
-  ],
+  // testResponse: [
+  //   {
+  //     questionName: [],
+  //     response: []
+  //   }
+  // ],
 
   createdAt: {
     type: Date,
