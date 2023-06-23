@@ -17,6 +17,21 @@ module.exports = {
         }
     }),
 
+    deleteFeedback: asyncWrapper(async (req, res) => {
+        const { id: feedbackID } = req.params
+        const feedback = await Feedback.findOneAndDelete({ _id: feedbackID })
+        try {
+            if (!feedback) {
+                res.status(400).json({ msg: `No Feedback found with id: ${feedbackID}` })
+            }
+            else {
+                res.status(200).json({ msg: "Feedback Deleted Successfully" })
+            }
+        } catch (error) {
+            res.status(500).json({ msg: "Invalid feedback id" })
+        }
+    }),
+
     getSingleFeedback: asyncWrapper(async (req, res) => {
         try {
             const feedback = await Feedback.findOne({ _id: req.params.id })
