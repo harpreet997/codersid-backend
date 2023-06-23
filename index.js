@@ -20,6 +20,7 @@ const tests = require('./routes/testroute');
 const assessmentCategory = require('./routes/assessmentcategoryroute');
 const testPerformance = require('./routes/testperformanceroute');
 const feedback = require('./routes/feedbackroutes')
+const studentfeedback = require('./routes/studentfeedbackroute')
 const bodyParser = require('body-parser');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
@@ -60,6 +61,7 @@ app.use('/api/tests', tests);
 app.use('/api/assessmentCategory', assessmentCategory);
 app.use('/api/testPerformance', testPerformance);
 app.use('/api/paymentrecords', paymentWithoutToken);
+app.use('/api/studentfeedback', studentfeedback);
 app.use('/api',feedback)
 app.use('/login',login );
 

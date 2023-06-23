@@ -107,7 +107,6 @@ const StudentSchema = new mongoose.Schema({
     default: false,
   },
 
-
   testRecords: [
     {
       testId: {
@@ -125,17 +124,23 @@ const StudentSchema = new mongoose.Schema({
       totalMarks: {
         type: Number
       },
-      testResponse: {
-        questionName: [],
-        response: []
-      }
+      testResponse: [{}]
     }
   ],
 
-  // testResponse: [
+
+  // feedbackRecords: [
   //   {
-  //     questionName: [],
-  //     response: []
+  //     feedbackId: {
+  //       type: String,
+  //     },
+  //     feedbackname: {
+  //       type: String,
+  //     },
+  //     feedbackcategory: {
+  //       type: String,
+  //     },
+  //     feedbackResponse: [{}]
   //   }
   // ],
 
