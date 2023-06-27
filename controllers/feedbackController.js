@@ -1,6 +1,7 @@
 const Feedback = require('../models/feedbackModal')
 const FeedbackCategory = require('../models/feedbackCategory')
 const asyncWrapper = require('../middleware/async')
+const {ObjectId } = require('mongodb');
 
 module.exports = {
     createFeedback: asyncWrapper(async (req, res) => {
@@ -136,18 +137,17 @@ module.exports = {
 
 
     addNewFeedbackQuestion: asyncWrapper(async (req, res) => {
-        // const { id: feedbackID } = req.params
-        // const feedbackQuestions = await Feedback.find({})
-        // const length = feedbackQuestions.length;
-        // let newFeedbackQuestion = {
-        //     ...req.body,
-        //     id: length
-        // }
         const { id: feedbackID } = req.params
+        const newObjectId = new ObjectId();
+        const payload = {
+            question: req.body.question,
+            _id: newObjectId.toString(),
+            id: req.body.id
+        }
         const feedbackquestion = await Feedback.updateOne(
             {  _id: feedbackID },
             { "$push": {
-                "questionslist": req.body
+                "questionslist": payload
             }}
             )
         try {

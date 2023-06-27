@@ -2,6 +2,7 @@
 const Test = require('../models/testmodal');
 const asyncWrapper = require('../middleware/async')
 const { createCustomError } = require('../errors/custom-error')
+const {ObjectId } = require('mongodb');
 
 const getAllTest = asyncWrapper(async (req, res) => {
     const authToken = req.headers.authorization;
@@ -107,6 +108,37 @@ const updateAssessmentQuestion = asyncWrapper(async (req, res) => {
     }
 })
 
+const addAssessmentQuestion = asyncWrapper(async (req, res) => {
+    const { id: testID } = req.params
+    const newObjectId = new ObjectId();
+    const payload = {
+        question: req.body.question,
+        option1: req.body.option1,
+        option2: req.body.option2,
+        option3: req.body.option3,
+        option4: req.body.option4,
+        answer: req.body.answer,
+        _id: newObjectId.toString(),
+        id: req.body.id
+    }
+    const assessmentQuestion = await Test.updateOne(
+        {  _id: testID },
+        { "$push": {
+            "questionslist": payload
+        }}
+        )
+    try {
+        if (!assessmentQuestion) {
+            return next(createCustomError(`Please fill all the required fields`, 500))
+        }
+        else {
+            res.status(200).json({ msg: "Assessment Question Added Successfully" })
+        }
+    } catch (error) {
+        res.status(400).json({ msg: "Assessment Question Already Exists" })
+    }
+})
+
 
 module.exports = {
     getAllTest,
@@ -115,5 +147,6 @@ module.exports = {
     getSingleTest,
     updateTest,
     deleteAssessmentQuestion,
-    updateAssessmentQuestion
+    updateAssessmentQuestion,
+    addAssessmentQuestion
 }
