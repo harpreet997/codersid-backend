@@ -64,11 +64,56 @@ const updateTest = asyncWrapper(async (req, res, next) => {
     }
 })
 
+const deleteAssessmentQuestion = asyncWrapper(async (req, res) => {
+    const { id: questionID } = req.params
+    const question = await Test.updateOne(
+        { 'questionslist._id': questionID },
+        { "$pull": {
+            "questionslist": {
+                "_id": questionID
+            }
+        }}
+        )
+    try {
+        if (!question) {
+            res.status(400).json({ msg: `No Question found with id: ${questionID}` })
+        }
+        else {
+            res.status(200).json({ msg: "Assessment Question Deleted Successfully" })
+        }
+    } catch (error) {
+        res.status(500).json({ msg: "Invalid Assessment Question id" })
+    }
+})
+
+const updateAssessmentQuestion = asyncWrapper(async (req, res) => {
+    const { id: questionID } = req.params
+    const question = await Test.findOneAndUpdate(
+        { 'questionslist._id': questionID },
+        { $set: { 'questionslist.$': req.body } },
+        {
+            new: true,
+            runValidators: true,
+        })
+    try {
+        if (!question) {
+            res.status(400).json({ msg: `No Question found with id: ${questionID}` })
+        }
+        else {
+            res.status(200).json({ msg: "Assessment Question Updated Successfully" })
+        }
+    } catch (error) {
+        res.status(500).json({ msg: "Invalid Assessment Question id" })
+    }
+})
+
 
 module.exports = {
     getAllTest,
     createTest,
     deleteTest,
     getSingleTest,
-    updateTest
+    updateTest,
+    deleteAssessmentQuestion,
+    updateAssessmentQuestion
 }

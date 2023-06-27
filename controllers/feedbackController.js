@@ -54,11 +54,13 @@ module.exports = {
 
     updateFeedback: asyncWrapper(async (req, res) => {
         const { id: feedbackID } = req.params
-        const feedback = await Feedback.findOneAndUpdate({ _id: feedbackID },
-            req.body, {
-            new: true,
-            runValidators: true,
-        })
+        const feedback = await Feedback.findOneAndUpdate(
+            { 'questionslist._id': feedbackID },
+            { $set: { 'questionslist.$': req.body } },
+            {
+                new: true,
+                runValidators: true,
+            })
         try {
             if (!feedback) {
                 res.status(400).json({ msg: `No feedback found with id: ${feedbackID}` })
@@ -107,6 +109,56 @@ module.exports = {
             }
         } catch (error) {
             res.status(500).json({ msg: "Invalid category id" })
+        }
+    }),
+
+    deleteFeedbackQuestion: asyncWrapper(async (req, res) => {
+        const { id: feedbackID } = req.params
+        const feedbackquestion = await Feedback.updateOne(
+            { 'questionslist._id': feedbackID },
+            { "$pull": {
+                "questionslist": {
+                    "_id": feedbackID
+                }
+            }}
+            )
+        try {
+            if (!feedbackquestion) {
+                res.status(400).json({ msg: `No Feedback Question found with id: ${feedbackID}` })
+            }
+            else {
+                res.status(200).json({ msg: "Feedback Question Deleted Successfully" })
+            }
+        } catch (error) {
+            res.status(500).json({ msg: "Invalid Feedback Question id" })
+        }
+    }),
+
+
+    addNewFeedbackQuestion: asyncWrapper(async (req, res) => {
+        // const { id: feedbackID } = req.params
+        // const feedbackQuestions = await Feedback.find({})
+        // const length = feedbackQuestions.length;
+        // let newFeedbackQuestion = {
+        //     ...req.body,
+        //     id: length
+        // }
+        const { id: feedbackID } = req.params
+        const feedbackquestion = await Feedback.updateOne(
+            {  _id: feedbackID },
+            { "$push": {
+                "questionslist": req.body
+            }}
+            )
+        try {
+            if (!feedbackquestion) {
+                return next(createCustomError(`Please fill all the required fields`, 500))
+            }
+            else {
+                res.status(200).json({ msg: "Feedback Question Added Successfully" })
+            }
+        } catch (error) {
+            res.status(400).json({ msg: "Feedback Question Already Exists" })
         }
     }),
 
