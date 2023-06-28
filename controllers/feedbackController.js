@@ -55,6 +55,25 @@ module.exports = {
 
     updateFeedback: asyncWrapper(async (req, res) => {
         const { id: feedbackID } = req.params
+        const feedback = await Feedback.findOneAndUpdate({ _id: feedbackID },
+            req.body, {
+            new: true,
+            runValidators: true,
+        })
+        try {
+            if (!feedback) {
+                res.status(400).json({ msg: `No feedback found with id: ${feedbackID}` })
+            }
+            else {
+                res.status(200).json({ msg: "Feedback Updated Successfully" })
+            }
+        } catch (error) {
+            res.status(500).json({ msg: "Invalid feedback id" })
+        }
+    }),
+
+    updateFeedbackQuestion: asyncWrapper(async (req, res) => {
+        const { id: feedbackID } = req.params
         const feedback = await Feedback.findOneAndUpdate(
             { 'questionslist._id': feedbackID },
             { $set: { 'questionslist.$': req.body } },

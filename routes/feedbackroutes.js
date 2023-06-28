@@ -10,7 +10,7 @@ routes.delete('/deleteFeedback/:id',feedback.deleteFeedback)
 routes.post('/getSingleFeedback/:id',feedback.updateFeedback)
 routes.delete('/deleteFeedbackCategory/:id',feedback.deleteFeedbackCategory)
 routes.get('/getSingleFeedback/:id',feedback.getSingleFeedback)
-routes.patch('/updateFeedback/:id', feedback.updateFeedback);
+routes.patch('/updateFeedback/:id', feedback.updateFeedbackQuestion);
 routes.delete('/deleteFeedbackQuestion/:id', feedback.deleteFeedbackQuestion);
 routes.post('/addNewFeedbackQuestion/:id', feedback.addNewFeedbackQuestion);
 
