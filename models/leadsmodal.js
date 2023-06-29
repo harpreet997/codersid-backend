@@ -51,16 +51,15 @@ const LeadsSchema = new mongoose.Schema({
       }
     }
   ],
-  // comments : [
-  //   {
-  //     type: String
-  //   }
-  // ],
+  
   status: {
     type: String
   },
   source: {
     type: String,
+  },
+  date: {
+    type: String
   },
   createdAt: {
     type: Date,
