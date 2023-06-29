@@ -27,6 +27,9 @@ const ExpenseSchema = new mongoose.Schema({
         required: [true, 'must provide invoice Number'],
         trim: true,
     },
+    PaidBy: {
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now()
